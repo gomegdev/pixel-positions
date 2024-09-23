@@ -1,23 +1,25 @@
+@props(['job'])
 
-    <x-panel class="mt-5 flex flex-col justify-between md:flex-row">
-        <div class="flex gap-6">
-            <x-employer-logo />
-            <div class="text-xl flex flex-col">
-                <h2 class="text-sm font-light capitalize mb-2 text-white/60">Company name</h2>
-                <h3 class="font-bold group-hover:text-blue-800 transition-colors duration-300">Full stack Laravel Developer</h3>
-                <p class="mt-auto text-xs text-white/60">Full time - From $60,000</p>
-            </div>
-        </div>
+<x-panel class="flex gap-x-6">
+    <div>
+        <x-employer-logo :employer="$job->employer" />
+    </div>
 
-        <div class="flex flex-col justify-between gap-2 md:items-end">
-            <div class="flex gap-4">
-                <span class="text-xs border border-white/10 rounded-xl px-2 py-1 hover:bg-white/25 transition-colors duration-300">Remote</span>
-                <span class="text-xs border border-white/10 rounded-xl px-2 py-1 hover:bg-white/25 transition-colors duration-300">22hr</span>
-            </div>
-            <div class="space-x-2">
-                <x-tag fontSize="text-xs">tag</x-tag>
-                <x-tag fontSize="text-xs">tag</x-tag>
-                <x-tag fontSize="text-xs">tag</x-tag>
-            </div>
-        </div>
-    </x-panel>
+    <div class="flex-1 flex flex-col">
+        <a href="#" class="self-start text-sm text-gray-400 transition-colors duration-300">{{ $job->employer->name }}</a>
+
+        <h3 class="font-bold text-xl mt-3 group-hover:text-blue-800">
+            <a href="{{ $job->url }}" target="_blank">
+                {{ $job->title }}
+            </a>
+        </h3>
+
+        <p class="text-sm text-gray-400 mt-auto">{{ $job->salary }}</p>
+    </div>
+
+    <div>
+        @foreach($job->tags as $tag)
+            <x-tag :$tag />
+        @endforeach
+    </div>
+</x-panel>
